@@ -1,0 +1,20 @@
+{
+  "name": "word-shower",
+  "version": "1.0.0",
+  "description": "A zen little game where you stare at your screen and come up with words from a transient stream of letters.",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luciavelasco/word-shower.git"
+  },
+  "bugs": {
+    "url": "https://github.com/luciavelasco/word-shower/issues"
+  },
+  "homepage": "https://github.com/luciavelasco/word-shower#readme",
+  "dependencies": {
+    "serve": "^14.2.0"
+  }
+}
