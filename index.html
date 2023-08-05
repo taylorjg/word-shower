@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Word Shower</title>
+    <script src="dictionary.js" type="application/javascript"></script>
+    <script src="index.js" type="application/javascript" defer></script>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<main id="word-shower">
+    <div class="container">
+        <div id="game"></div>
+        <input id="game-input"/>
+        <button id="toggle-play">Start</button>
+        <p class="controls">Press Space to Start or Pause the game</p>
+        <div class="points-container"><span id="points">0</span> points</div>
+        <p id="error"></p>
+    </div>
+    <div class="rules">
+        <div class="faded-overflow-container">
+            <section id="correct-words"></section>
+        </div>
+        <section>
+            <ul>
+                <li>Click start to generate letters</li>
+                <li>Type in letters you can see to form words that are 4 letters or more</li>
+                <li>Once you have a complete word, press enter to validate the word</li>
+                <li>Valid words will get added to your score, at a point per letter</li>
+            </ul>
+        </section>
+<!--        <p>-->
+<!--            This game is good for practicing your touch typing,-->
+<!--            as you'll have to keep your eyes on the screen while you type. -->
+<!--        </p>-->
+    </div>
+</main>
+</body>
+</html>
