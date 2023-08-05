@@ -12,6 +12,7 @@ let intervalId = false;
 let cleanupTimeoutId = false;
 let errorTimeoutId = false;
 let speechRecognitionActive = false;
+let lastWordAdded;
 
 const recognition = new SpeechRecognition();
 recognition.continuous = true;
@@ -37,17 +38,7 @@ if (typeof dictionary === `undefined`) {
 }
 
 // constants
-const alphabet = [`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `m`, `n`, `o`, `p`, `q`, `r`, `s`, `t`, `u`, `v`, `w`, `x`, `y`, `z`]
-const weightedLetters = [`a`, `e`, `i`, `o`, `u`, `s`]
-// TODO: might be nice to distribute letters like in Scrabble:
-// 1 point: E ×12, A ×9, I ×9, O ×8, N ×6, R ×6, T ×6, L ×4, S ×4, U ×4
-// 2 points: D ×4, G ×3
-// 3 points: B ×2, C ×2, M ×2, P ×2
-// 4 points: F ×2, H ×2, V ×2, W ×2, Y ×2
-// 5 points: K ×1
-// 8 points: J ×1, X ×1
-// 10 points: Q ×1, Z ×1
-const randomLetterList = [...alphabet, ...weightedLetters, ...weightedLetters]
+const randomLetterList = getFullSetOfScrabbleLetters()
 const animationTime = 4000;
 
 // Game Logic
@@ -100,6 +91,9 @@ document.addEventListener(`keydown`, (e) => {
 })
 
 const addWord = word => {
+  if (word === lastWordAdded) return;
+  lastWordAdded = word;
+
   const currentCount = foundWords[word] ?? 0;
   const newCount = currentCount + 1;
   foundWords = { ...foundWords, [word]: newCount };
@@ -109,15 +103,10 @@ const addWord = word => {
     correctWords.insertAdjacentHTML(`afterbegin`, `<span>${word}</span>`);
   }
 
-  // TODO: might be nice to score letters like in Scrabble:
-  // 1 point - A, E, I, O, U, L, N, S, T, R.
-  // 2 points - D, G.
-  // 3 points - B, C, M, P.
-  // 4 points - F, H, V, W, Y.
-  // 5 points - K.
-  // 8 points - J, X.
-  // 10 points - Q, Z.
-  score.innerText = `${parseInt(score.innerText) + word.length}`
+  const wordScore = getScrabbleScore(word);
+  const currentScore = parseInt(score.innerText);
+  const newScore = currentScore + wordScore;
+  score.innerText = newScore.toString();
 };
 
 input.addEventListener(`keydown`, (e) => {
