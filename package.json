@@ -4,7 +4,10 @@
   "description": "A zen little game where you stare at your screen and come up with words from a transient stream of letters.",
   "main": "index.js",
   "scripts": {
-    "start": "serve"
+    "start": "serve",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "rm -rf dist && mkdir dist && cp *.js *.html *.css dist",
+    "open": "open https://taylorjg.github.io/word-shower"
   },
   "repository": {
     "type": "git",
@@ -14,7 +17,9 @@
     "url": "https://github.com/luciavelasco/word-shower/issues"
   },
   "homepage": "https://github.com/luciavelasco/word-shower#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "gh-pages": "^5.0.0",
     "serve": "^14.2.0"
   }
 }
